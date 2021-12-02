@@ -9,19 +9,19 @@ import java.util.ArrayList;
 
 @RestController
 public class TodoListController {
-	private final ArrayList<Todo> todos;
+	private final TodoRepository todos;
 
-	public TodoListController() {
-		todos = new ArrayList<>();
+	public TodoListController(TodoRepository repo) {
+		todos = repo;
 	}
 
 	@PostMapping("/api/todo")
 	public void addTodo(@RequestBody Todo todo) {
-		todos.add(todo);
+		todos.save(todo);
 	}
 
 	@GetMapping("/api/todo")
-	public ArrayList<Todo> getTodos() {
+	public TodoRepository getTodos() {
 		return todos;
 	}
 }

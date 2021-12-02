@@ -1,3 +1,6 @@
 package fr.lernejo.todo;
 
-public record Todo(String message, String author) {}
+public class Todo extends TodoIdentity {
+
+	public Todo(String message, String author) {}
+}
