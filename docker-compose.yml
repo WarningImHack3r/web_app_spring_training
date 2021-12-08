@@ -10,7 +10,7 @@ services:
             - "traefik.http.routers.todolist.middlewares=todolist@docker"
 
     traefik:
-        image: traefik:2.5
+        image: traefik:latest
         restart: unless-stopped
         ports:
             - "80:80"
@@ -20,7 +20,7 @@ services:
             - ./traefik.toml:/traefik.toml
 
     postgres:
-        image: postgres:14.0-alpine
+        image: postgres:latest
         container_name: postgres
         ports:
             - "5432:5432"

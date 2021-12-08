@@ -1,5 +1,6 @@
 package fr.lernejo.todo;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,12 +17,15 @@ public class TodoListController {
 	}
 
 	@PostMapping("/api/todo")
-	public void addTodo(@RequestBody Todo todo) {
-		todos.save(todo);
+	public void addTodo(@RequestBody @NotNull Todo todo) {
+		TodoEntity entity = new TodoEntity();
+		entity.author = todo.author();
+		entity.message = todo.message();
+		todos.save(entity);
 	}
 
 	@GetMapping("/api/todo")
-	public TodoRepository getTodos() {
-		return todos;
+	public Iterable<TodoEntity> getTodos() {
+		return todos.findAll();
 	}
 }
