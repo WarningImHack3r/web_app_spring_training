@@ -1,5 +1,6 @@
 package fr.lernejo.todo;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -16,17 +17,8 @@ public class ApplicationIdentifierFilter implements Filter {
 	}
 
 	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-		Filter.super.init(filterConfig);
-	}
-
-	@Override
-	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) {
+	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, @NotNull FilterChain filterChain) throws ServletException, IOException {
 		((HttpServletResponse)servletResponse).setHeader("Instance-Id", uuid);
-	}
-
-	@Override
-	public void destroy() {
-		Filter.super.destroy();
+		filterChain.doFilter(servletRequest, servletResponse);
 	}
 }
