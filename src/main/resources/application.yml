@@ -4,3 +4,5 @@ spring:
         url: jdbc:postgresql://localhost:5432,postgres:5432/postgres
         username: postgres
         password: example
+    jpa:
+        open-in-view: false
